@@ -2,9 +2,9 @@
 Main integration script for the AI Spam Message Classifier.
 """
 
-import os
 import logging
 import numpy as np
+
 from load_data import load_data
 from preprocess import clean_text
 from features import extract_features
@@ -12,12 +12,11 @@ from model import train_model
 from evaluate import evaluate_model
 from predict import predict_message
 from model_io import save_model, load_model
+from config import DATA_PATH, MODEL_PATH, LOG_LEVEL
 
-
-MODEL_PATH = "spam_model.pkl"
 
 logging.basicConfig(
-    level=logging.INFO,
+    level=getattr(logging, LOG_LEVEL),
     format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
@@ -31,7 +30,7 @@ def main() -> None:
     logger.info("Starting spam classification pipeline")
 
     # Step 1: Load data
-    data = load_data("../data/spam.csv")
+    data = load_data(DATA_PATH)
 
     if data is None:
         logger.error("Failed to load data. Exiting.")
@@ -77,7 +76,6 @@ def main() -> None:
 
     logger.info("New Message: %s", new_message)
     logger.info("Prediction: %s", result)
-
     logger.info("Spam classification pipeline completed successfully")
 
 
