@@ -72,4 +72,4 @@ Strong foundation for NLP-based projects
 
 Joncy Keda
 
-AI & Python Learner
+AI Developer
